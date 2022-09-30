@@ -72,19 +72,34 @@
  */
 
 // @lc code=start
-/**
+// /** 1. 利用一个数组存没有出现过的元素
+//  * @param {number[]} nums
+//  * @return {number}
+//  */
+// var removeDuplicates = function (nums) {
+//   const arr = []
+//   for (let i = 0; i < nums.length; i++) {
+//     const element = nums[i]
+//     if (!arr.includes(element)) {
+//       arr.push(element)
+//       nums[arr.length - 1] = element
+//     }
+//   }
+//   return arr.length
+// }
+
+/** 2. 边遍历边修改
  * @param {number[]} nums
  * @return {number}
  */
 var removeDuplicates = function (nums) {
-  const arr = []
-  for (let i = 0; i < nums.length; i++) {
-    const element = nums[i]
-    if (!arr.includes(element)) {
-      arr.push(element)
-      nums[arr.length - 1] = element
+  let slow = 0
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] != nums[slow]) {
+      slow++
+      nums[slow] = nums[i]
     }
   }
-  return arr.length
+  return slow + 1
 }
 // @lc code=end
